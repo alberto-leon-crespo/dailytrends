@@ -5,7 +5,6 @@ import { Optional } from 'typescript-optional';
 import { FeedEntityRepository } from '../../../domain/ports/feed.repository';
 import { Feed } from '../../../domain/feed';
 import FeedMapper from '../../mapper/feed.mapper';
-import { FeedDocument, FeedSchema } from '../schema/feed.schema';
 import { FeedEntity } from '../entity/feed.entity';
 
 @Injectable()
