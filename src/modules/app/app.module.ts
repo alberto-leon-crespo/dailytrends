@@ -19,7 +19,7 @@ import { ConfigService } from '@nestjs/config';
       useFactory: async (configService: ConfigService) => {
         return {
           uri: configService.get<string>('database.uri'),
-          dbName: 'dailytrends',
+          dbName: configService.get<string>('database.database'),
         };
       },
       inject: [ConfigService],
