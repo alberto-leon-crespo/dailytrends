@@ -6,14 +6,17 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Res,
 } from '@nestjs/common';
 import { GetAllFeedsQuery } from '../../application/querys/get-all-feeds.query';
 import { GetFeedByIdQuery } from '../../application/querys/get-feed-by-id.query';
-import { CreateFeedDto } from '../dtos/feed.dto';
+import { CreateFeedDto } from '../dtos/create-feed.dto';
 import { PostFeedCommand } from '../../application/commands/post-feed.command';
 import { Feed } from '../../domain/feed';
 import { DeleteFeedCommand } from '../../application/commands/delete-feed.command';
+import { UpdateFeedDto } from '../dtos/update-feed.dto';
+import { PutFeedCommand } from '../../application/commands/put-feed.command';
 
 @Controller('feeds')
 export class FeedController {
@@ -22,6 +25,7 @@ export class FeedController {
     private getFeedByIdQuery: GetFeedByIdQuery,
     private postFeedCommand: PostFeedCommand,
     private deleteFeedCommand: DeleteFeedCommand,
+    private putFeedCommand: PutFeedCommand,
   ) {}
 
   @Get()
@@ -55,5 +59,18 @@ export class FeedController {
   ): Promise<any> {
     const feed = await this.deleteFeedCommand.run(id);
     return request.status(HttpStatus.NO_CONTENT).json(feed);
+  }
+
+  @Put('/:id')
+  public async updateFeed(
+    @Res() request,
+    @Param('id') id: string,
+    @Body() feed: UpdateFeedDto,
+  ): Promise<any> {
+    const feedUpdated = await this.putFeedCommand.run(
+      id,
+      feed as unknown as Feed,
+    );
+    return request.status(HttpStatus.OK).json(feedUpdated);
   }
 }

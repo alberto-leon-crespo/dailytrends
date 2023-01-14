@@ -10,6 +10,7 @@ import { GetAllFeedsQuery } from './application/querys/get-all-feeds.query';
 import { GetFeedByIdQuery } from './application/querys/get-feed-by-id.query';
 import { PostFeedCommand } from './application/commands/post-feed.command';
 import { DeleteFeedCommand } from './application/commands/delete-feed.command';
+import { PutFeedCommand } from './application/commands/put-feed.command';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { DeleteFeedCommand } from './application/commands/delete-feed.command';
     GetFeedByIdQuery,
     PostFeedCommand,
     DeleteFeedCommand,
+    PutFeedCommand,
   ],
   exports: [FeedRepositoryMongo, MongooseModule],
 })
