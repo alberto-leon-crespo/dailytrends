@@ -11,7 +11,9 @@ import { Feed as FeedDefinition, FeedDocument } from '../schema/feed.schema';
 export class FeedRepositoryMongo implements FeedRepository {
   constructor(
     @InjectModel(FeedDefinition.name) private feedModel: Model<FeedDocument>,
-  ) {}
+  ) {
+    (async () => await this.seedFeeds())();
+  }
 
   public async getAll(): Promise<Feed[]> {
     const feeds = await this.feedModel.find();
@@ -39,5 +41,26 @@ export class FeedRepositoryMongo implements FeedRepository {
       new: true,
     });
     return FeedMapper.toDomain(feedUpdated);
+  }
+
+  public async seedFeeds() {
+    const feeds = await this.feedModel.find();
+    if (feeds.length < 1) {
+      const feeds = [
+        {
+          id: '63c31203db86502ee44a34d0',
+          name: 'El Pais',
+          url: 'https://elpais.com/',
+        },
+        {
+          id: '63c31219db86502ee44a34d2',
+          name: 'El Mundo',
+          url: 'https://www.elmundo.es/',
+        },
+      ];
+      for (const feed of feeds) {
+        await this.createFeed(feed as unknown as Feed);
+      }
+    }
   }
 }
