@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { GetAllFeedsQuery } from './application/querys/get-all-feeds.query';
 import { GetFeedByIdQuery } from './application/querys/get-feed-by-id.query';
 import { PostFeedCommand } from './application/commands/post-feed.command';
+import { DeleteFeedCommand } from './application/commands/delete-feed.command';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PostFeedCommand } from './application/commands/post-feed.command';
     GetAllFeedsQuery,
     GetFeedByIdQuery,
     PostFeedCommand,
+    DeleteFeedCommand,
   ],
   exports: [FeedRepositoryMongo, MongooseModule],
 })
