@@ -1,7 +1,7 @@
 import { Feed } from '../feed';
 import { Optional } from 'typescript-optional';
 
-export interface FeedEntityRepository {
+export interface FeedRepository {
   getAll(): Promise<Feed[]>;
 
   /**

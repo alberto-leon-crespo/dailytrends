@@ -1,8 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, HydratedDocument } from 'mongoose';
 
-@Schema()
-export class Feed extends Document {
+@Schema({
+  collection: 'Feeds',
+})
+export class Feed {
   @Prop()
   name: string;
 

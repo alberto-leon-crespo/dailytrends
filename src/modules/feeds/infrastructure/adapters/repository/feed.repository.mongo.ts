@@ -2,16 +2,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Optional } from 'typescript-optional';
-import { FeedEntityRepository } from '../../../domain/ports/feed.repository';
+import { FeedRepository } from '../../../domain/ports/feed.repository';
 import { Feed } from '../../../domain/feed';
 import FeedMapper from '../../mapper/feed.mapper';
-import { FeedEntity } from '../entity/feed.entity';
+import { Feed as FeedDefinition, FeedDocument } from '../schema/feed.schema';
 
 @Injectable()
-export default class FeedRepositoryMongo implements FeedEntityRepository {
+export class FeedRepositoryMongo implements FeedRepository {
   constructor(
-    @InjectModel('FeedEntity')
-    private readonly feedModel: Model<FeedEntity>,
+    @InjectModel(FeedDefinition.name) private feedModel: Model<FeedDocument>,
   ) {}
 
   public async getAll(): Promise<Feed[]> {
