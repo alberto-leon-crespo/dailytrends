@@ -1,20 +1,27 @@
+// Modules
 import { Module } from '@nestjs/common';
 import { FeedsModule } from '../feeds/feeds.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 // Configs
 import databaseConfig from './infrastructure/config/database.config';
-import { MongooseModule } from '@nestjs/mongoose';
+import app from './infrastructure/config/app.config';
+// Services
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [databaseConfig],
+      load: [app, databaseConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('database.uri'),
-      }),
+      useFactory: async (configService: ConfigService) => {
+        return {
+          uri: configService.get<string>('database.uri'),
+          dbName: configService.get<string>('database.database'),
+        };
+      },
       inject: [ConfigService],
     }),
     FeedsModule,
