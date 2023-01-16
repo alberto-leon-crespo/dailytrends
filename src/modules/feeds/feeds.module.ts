@@ -13,6 +13,7 @@ import { DeleteFeedCommand } from './application/commands/delete-feed.command';
 import { PutFeedCommand } from './application/commands/put-feed.command';
 import { ReadFeedsConsole } from './infrastructure/console/read-feeds.console';
 import { NewsModule } from '../news/news.module';
+import { SeedFeedsConsole } from './infrastructure/console/seed-feeds.console';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { NewsModule } from '../news/news.module';
     DeleteFeedCommand,
     PutFeedCommand,
     ReadFeedsConsole,
+    SeedFeedsConsole,
   ],
   exports: [FeedRepositoryMongo, MongooseModule],
 })

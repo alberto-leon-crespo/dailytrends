@@ -1,29 +1,29 @@
 export class New {
-  private readonly _id?: string;
-  private readonly _author: string;
-  private readonly _title: string;
-  private readonly _url: string;
+  private id?: string;
+  private author: string;
+  private title: string;
+  private url: string;
 
   public constructor(id: string, author: string, title: string, url: string) {
-    this._id = id;
-    this._author = author;
-    this._title = title;
-    this._url = url;
+    this.id = id;
+    this.author = author;
+    this.title = title;
+    this.url = url;
   }
 
   getId(): string {
-    return this._id;
+    return this.id;
   }
 
   getAuthor(): string {
-    return this._author;
+    return this.author;
   }
 
   getTitle(): string {
-    return this._title;
+    return this.title;
   }
 
   getUrl(): string {
-    return this._url;
+    return this.url;
   }
 }

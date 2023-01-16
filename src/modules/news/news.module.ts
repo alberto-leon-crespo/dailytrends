@@ -7,13 +7,21 @@ import {
 } from './infrastructure/adapters/schema/new.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostNewCommand } from './application/commands/post-new.command';
+import { GetAllNewsQuery } from './application/querys/get-all-news.query';
+import {
+  Feed as FeedModel,
+  FeedSchema,
+} from '../feeds/infrastructure/adapters/schema/feed.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: NewModel.name, schema: NewSchema }]),
+    MongooseModule.forFeature([
+      { name: NewModel.name, schema: NewSchema },
+      { name: FeedModel.name, schema: FeedSchema },
+    ]),
   ],
   controllers: [NewController],
-  providers: [NewModel, NewRepositoryMongo, PostNewCommand],
+  providers: [NewModel, NewRepositoryMongo, PostNewCommand, GetAllNewsQuery],
   exports: [NewRepositoryMongo, MongooseModule, PostNewCommand],
 })
 export class NewsModule {}
