@@ -46,8 +46,26 @@ export abstract class FeedReader {
       );
       this.selectors[index].setValue(list[fieldName]);
     }
-    console.log(list);
     await this.browser.close();
-    return this.selectors;
+    const news = [];
+    for (const selectorId in this.selectors) {
+      const selector = this.selectors[selectorId];
+      const newsLength = selector.getValue().length;
+      for (let i = 0; i <= newsLength - 1; i++) {
+        if (news[i]) {
+          if (news[i] && news[i][selector.getFieldName()]) {
+            news[i][selector.getFieldName()] = selector.getValue()[i];
+          } else if (news[i] && !news[i][selector.getFieldName()]) {
+            news[i][selector.getFieldName()] = {};
+            news[i][selector.getFieldName()] = selector.getValue()[i];
+          }
+        } else {
+          news[i] = {};
+          news[i][selector.getFieldName()] = {};
+          news[i][selector.getFieldName()] = selector.getValue()[i];
+        }
+      }
+    }
+    return news;
   }
 }

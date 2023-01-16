@@ -11,9 +11,7 @@ import { Feed as FeedDefinition, FeedDocument } from '../schema/feed.schema';
 export class FeedRepositoryMongo implements FeedRepository {
   constructor(
     @InjectModel(FeedDefinition.name) private feedModel: Model<FeedDocument>,
-  ) {
-    (async () => await this.seedFeeds())();
-  }
+  ) {}
 
   public async getAll(): Promise<Feed[]> {
     const feeds = await this.feedModel.find();

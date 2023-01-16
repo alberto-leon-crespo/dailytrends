@@ -11,10 +11,13 @@ import { GetFeedByIdQuery } from './application/querys/get-feed-by-id.query';
 import { PostFeedCommand } from './application/commands/post-feed.command';
 import { DeleteFeedCommand } from './application/commands/delete-feed.command';
 import { PutFeedCommand } from './application/commands/put-feed.command';
+import { ReadFeedsConsole } from './infrastructure/console/read-feeds.console';
+import { NewsModule } from '../news/news.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: FeedModel.name, schema: FeedSchema }]),
+    NewsModule,
   ],
   controllers: [FeedController],
   providers: [
@@ -25,6 +28,7 @@ import { PutFeedCommand } from './application/commands/put-feed.command';
     PostFeedCommand,
     DeleteFeedCommand,
     PutFeedCommand,
+    ReadFeedsConsole,
   ],
   exports: [FeedRepositoryMongo, MongooseModule],
 })
