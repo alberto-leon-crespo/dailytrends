@@ -25,6 +25,12 @@ With yarn
 yarn
 ```
 
+Now run docker compose to setup database and admin panel
+```bash
+sudo docker-compose up -d
+```
+Copy file .env.example to root folder as .env 
+
 The next step is populate database with feeds seed.
 ```bash
 yarn start:console:dev feeds:seed
