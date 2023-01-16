@@ -12,7 +12,7 @@ export abstract class FeedReader {
         new CssSelector(
           selectors[selectorName].query,
           selectorName,
-          selectors[selectorName].attributes,
+          selectors[selectorName].attribute,
         ),
       );
     }
@@ -29,12 +29,25 @@ export abstract class FeedReader {
   }
 
   public async read(): Promise<CssSelector[]> {
-    return await this.page.evaluate(() => {
-      for (const selector of this.selectors) {
-        const item: Element = document.querySelector(selector.getCssQuery());
-        selector.setValue(item.innerHTML);
-      }
-      return this.selectors;
-    });
+    const list: any = {};
+    for (const index in this.selectors) {
+      const selectorQuery = this.selectors[index].getCssQuery();
+      const fieldName = this.selectors[index].getFieldName();
+      const fieldAttribute = this.selectors[index].getAttribute();
+      list[fieldName] = await this.page.evaluate(
+        (selectorQuery, fieldAttribute) => {
+          return Array.from(
+            document.querySelectorAll(selectorQuery),
+            (ele: HTMLElement) => ele[fieldAttribute],
+          );
+        },
+        selectorQuery,
+        fieldAttribute,
+      );
+      this.selectors[index].setValue(list[fieldName]);
+    }
+    console.log(list);
+    await this.browser.close();
+    return this.selectors;
   }
 }

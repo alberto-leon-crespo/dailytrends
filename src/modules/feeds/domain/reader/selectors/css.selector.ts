@@ -21,4 +21,8 @@ export class CssSelector {
   public getCssQuery() {
     return this.cssQuery;
   }
+
+  public getAttribute() {
+    return this.attribute;
+  }
 }
