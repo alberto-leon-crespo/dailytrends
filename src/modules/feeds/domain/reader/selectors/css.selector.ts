@@ -1,6 +1,10 @@
 export class CssSelector {
   private value: any;
-  public constructor(private cssQuery: string, private fieldName: string) {}
+  public constructor(
+    private cssQuery: string,
+    private fieldName: string,
+    private attribute: string,
+  ) {}
 
   public setValue(value: any) {
     this.value = value;

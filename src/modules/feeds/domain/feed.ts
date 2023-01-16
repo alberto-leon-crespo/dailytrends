@@ -1,10 +1,10 @@
 import { FeedSelectors } from './feed.selectors';
+import { FeedReader } from './reader/feed.reader';
 
-export class Feed {
+export class Feed extends FeedReader {
   private id?: string;
   private name: string;
-  private url: string;
-  private selectors: FeedSelectors;
+  protected url: string;
 
   public constructor(
     id: string,
@@ -12,10 +12,10 @@ export class Feed {
     url: string,
     selectors: FeedSelectors,
   ) {
+    super(url, selectors);
     this.id = id;
     this.name = name;
     this.url = url;
-    this.selectors = selectors;
   }
 
   public getName(): string {
