@@ -10,8 +10,8 @@ If use Node Version Manager on root folder of project run
 ```bash
 nvm use
 ```
-The command read .nvmrc and set your NVM version to v14.21.2. If prefer install node manually
-Dont use any version up tp v14 LTS for compatibility reasons
+The command read .nvmrc and set your NVM version to v14.21.2. If prefer install node manually.
+Dont use any version up to v14 LTS for compatibility reasons
 
 Then u need to install all deps
 
@@ -46,4 +46,10 @@ Finally start dev server
 yarn start:dev
 ```
 
-In http://127.0.0.1:8081 u can take a look about Feeds and News Collections 
+In http://127.0.0.1:8081 u can take a look about Feeds and News Collections
+
+# Testing
+Project have e2e test to verify all endpoints. Can execute with:
+```bash
+yarn test:e2e
+```
