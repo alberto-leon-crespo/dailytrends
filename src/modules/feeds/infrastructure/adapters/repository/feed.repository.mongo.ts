@@ -48,14 +48,42 @@ export class FeedRepositoryMongo implements FeedRepository {
     if (feeds.length < 1) {
       const feeds = [
         {
-          id: '63c31203db86502ee44a34d0',
+          id: '63c37f6148f1f6e938e81793',
           name: 'El Pais',
           url: 'https://elpais.com/',
+          selectors: {
+            title: {
+              query: 'section[data-dtm-region="portada_apertura"] h2 a',
+              attribute: 'innerText',
+            },
+            author: {
+              query: 'section[data-dtm-region="portada_apertura"] div.c_a',
+              attribute: 'innerText',
+            },
+            link: {
+              query: 'section[data-dtm-region="portada_apertura"] h2 a',
+              attribute: 'href',
+            },
+          },
         },
         {
-          id: '63c31219db86502ee44a34d2',
+          id: '63c37f6248f1f6e938e81795',
           name: 'El Mundo',
           url: 'https://www.elmundo.es/',
+          selectors: {
+            title: {
+              query: 'article[ue-article-id] .ue-c-cover-content__headline',
+              attribute: 'innerText',
+            },
+            author: {
+              query: 'article[ue-article-id] .ue-c-cover-content__byline-name',
+              attribute: 'innerText',
+            },
+            link: {
+              query: 'article[ue-article-id] .ue-c-cover-content__link',
+              attribute: 'href',
+            },
+          },
         },
       ];
       for (const feed of feeds) {
