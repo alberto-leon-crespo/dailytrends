@@ -1,6 +1,7 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { CssSelector } from './selectors/css.selector';
 import { FeedSelectors } from '../feed.selectors';
+import * as process from 'process';
 
 export abstract class FeedReader {
   private browser: Browser;
@@ -19,7 +20,9 @@ export abstract class FeedReader {
   }
 
   public async initializeReader() {
-    this.browser = await puppeteer.launch({ headless: false });
+    this.browser = await puppeteer.launch({
+      headless: process.env.PUPPETER_HEADLESS === 'true',
+    });
     this.page = await this.browser.newPage();
     await this.page.goto(this.url);
   }

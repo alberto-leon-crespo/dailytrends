@@ -48,6 +48,14 @@ yarn start:dev
 
 In http://127.0.0.1:8081 u can take a look about Feeds and News Collections
 
+In env vars PUPPETER_HEADLESS=false indicates that puppeteer API show up navigator window. In true hide window and make
+all process on background. If u execute this porject on a server, take care about this param
+
+To prevent execution errors you need to install chromiun in computer that execute this project
+```bash
+sudo apt install chromium-browser
+```
+
 # Testing
 Project have e2e test to verify all endpoints. Can execute with:
 ```bash
